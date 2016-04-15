@@ -15,10 +15,21 @@ class AbstractMelonOrder(object):
 
     def get_total(self):
         """Calculate price."""
-
+        
         base_price = 5
+        #Christmas Melon Pricing
+        #checkng if species is equal to christmas melon(first we 
+        #had "is" which checked for christmas melon was in the same place in memory)
+        if self.species == "christmas melon":
+            base_price = base_price * 1.5
+
         total = (1 + self.tax) * self.qty * base_price
+       
+        #International Pricing       
+        if self.qty < 10 and self.order_type == "international":
+            total += 3 
         return total
+                
 
 class DomesticMelonOrder(AbstractMelonOrder):
     """A domestic (in the US) melon order."""
